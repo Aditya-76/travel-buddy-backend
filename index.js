@@ -1,4 +1,3 @@
-import { Socket } from "socket.io";
 import { WebSocketActions } from "./constants";
 
 const express = require("express");
@@ -21,7 +20,7 @@ const io = socketIo(server, {
   },
 });
 
-io.on("connection", (socket: Socket) => {
+io.on("connection", (socket) => {
   console.log("New user connected");
 
   socket.on("sendMessage", (message) => {
