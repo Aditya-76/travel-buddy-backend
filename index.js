@@ -1,9 +1,9 @@
-import { WebSocketActions } from "./constants.js";
-
-const express = require("express");
-const http = require("http");
-const socketIo = require("socket.io");
-const cors = require("cors");
+// Import statements using ES module syntax
+import express from "express";
+import http from "http";
+import { Server } from "socket.io";
+import cors from "cors";
+import { WebSocketActions } from "./constants.js"; // Make sure to use .js if it's a JavaScript file
 
 const app = express();
 
@@ -14,7 +14,7 @@ app.use(
 );
 
 const server = http.createServer(app);
-const io = socketIo(server, {
+const io = new Server(server, {
   cors: {
     origin: "*",
   },
@@ -32,7 +32,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on(WebSocketActions.UPDATE_LOCATION, (location) => {
-    console.log("Recieved location", location);
+    console.log("Received location", location);
     io.emit(WebSocketActions.UPDATE_LOCATION, location);
   });
 });
