@@ -1,3 +1,4 @@
+import { Socket } from "socket.io";
 import { WebSocketActions } from "./constants";
 
 const express = require("express");
@@ -20,7 +21,7 @@ const io = socketIo(server, {
   },
 });
 
-io.on("connection", (socket) => {
+io.on("connection", (socket: Socket) => {
   console.log("New user connected");
 
   socket.on("sendMessage", (message) => {
@@ -31,9 +32,9 @@ io.on("connection", (socket) => {
     console.log("User disconnected");
   });
 
-  socket.on(WebSocketActions.UPDATE_LOCATION, (message) => {
-    console.log("Recieved location", message);
-    io.emit(WebSocketActions.UPDATE_LOCATION, message);
+  socket.on(WebSocketActions.UPDATE_LOCATION, (location) => {
+    console.log("Recieved location", location);
+    io.emit(WebSocketActions.UPDATE_LOCATION, location);
   });
 });
 
