@@ -1,4 +1,4 @@
-import { WebSocketActions } from "./constants";
+import { WebSocketActions } from "./constants.js";
 
 const express = require("express");
 const http = require("http");
